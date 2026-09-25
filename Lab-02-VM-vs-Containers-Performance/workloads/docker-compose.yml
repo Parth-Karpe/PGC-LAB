@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  benchmark-api:
+    image: python:3.11-slim
+    container_name: pgc-benchmark-api
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: bash -c "pip install --no-cache-dir -r requirements.txt && uvicorn app:app --host 0.0.0.0 --port 8000 --workers 4"
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 2G
+    restart: unless-stopped

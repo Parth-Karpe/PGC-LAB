@@ -1,0 +1,11 @@
+=======================================================
+CONTROLLED VIRTUAL MACHINE CONFIGURATION (VMware Workstation)
+=======================================================
+Hypervisor:            VMware Workstation Pro 17.5 / Proxmox VE KVM
+Guest Operating System: Ubuntu 24.04 LTS (x86_64)
+Assigned vCPUs:        4 vCPUs (Single socket, 4 cores)
+Assigned Memory (RAM): 8192 MB (8.0 GB)
+Virtual Disk Capacity: 60.0 GB (NVMe / SCSI single disk image)
+Network Adapter:       NAT Mode / Bridged (vmnet8 virtual switch)
+Display Acceleration:  Standard 3D Graphics
+Execution Mode:        Full Virtualization with Intel VT-x hardware assist

@@ -1,0 +1,22 @@
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*~
+
+# MS Office lock files
+~$*
+
+# Build artifacts and binaries
+*.o
+*.out
+*.exe
+matrix_sequential
+matrix_openmp
+matrix_mpi
+matrix_cuda
+
+# Python virtual environment and caches
+__pycache__/
+*.pyc
+.pytest_cache/

@@ -1,0 +1,11 @@
+Category,Metric,Unit,VMware_VM,Docker_Container,Advantage
+CPU Compute,Sysbench Events/sec,events/s,2850.4,3180.75,Docker (+11.6%)
+CPU Latency,Avg Event Latency,ms,1.4,1.25,Docker (-10.7%)
+Memory Speed,Sysbench Read/Write Bandwidth,MiB/s,18450.2,22100.8,Docker (+19.8%)
+Storage I/O,fio 4K Random Read/Write,MB/s,483.0,758.0,Docker (+56.9%)
+Storage IOPS,fio Random IOPS,kIOPS,123.8,194.0,Docker (+56.7%)
+Network,iperf3 Throughput (Host mode),Gbits/sec,8.74,38.4,Docker (4.4x higher)
+Application,FastAPI Throughput,req/sec,1420.0,1890.0,Docker (+33.1%)
+Application,FastAPI Mean Latency,ms,35.2,26.4,Docker (-25.0%)
+Lifecycle,Cold Startup Time,seconds,24.8,0.85,Docker (29.2x faster)
+Density,Idle Memory Footprint,MB,1250.0,142.0,Docker (8.8x lighter)

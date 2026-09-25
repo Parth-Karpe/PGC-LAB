@@ -1,0 +1,7 @@
+# Open MPI Hostfile Configuration for 4-Node Cluster
+# Master Node (Rank 0)
+master slots=1 max_slots=2
+# Worker Nodes (Rank 1, 2, 3)
+worker1 slots=1 max_slots=2
+worker2 slots=1 max_slots=2
+worker3 slots=1 max_slots=2
