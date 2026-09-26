@@ -20,3 +20,6 @@ matrix_cuda
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Local reference & notes (do not push to git)
+VIVA_AND_EXAM_QUICK_REFERENCE.md
