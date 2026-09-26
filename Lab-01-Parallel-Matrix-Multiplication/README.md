@@ -33,27 +33,32 @@ $$C[0][0] = \sum_{k=0}^{3999} (A[0][k] \times B[k][0]) = \sum_{k=0}^{3999} (1.0 
 
 ```
 Lab-01-Parallel-Matrix-Multiplication/
-├── src/
-│   ├── sequential/
-│   │   └── matrix_sequential.c    # Single-threaded baseline C program
-│   ├── openmp/
-│   │   └── matrix_openmp.c        # Shared-memory OpenMP multi-threaded C program
-│   ├── mpi/
-│   │   ├── matrix_mpi.c           # Distributed-memory MPI C program
-│   │   └── hosts                  # Cluster nodes hostfile
-│   └── cuda/
-│       └── matrix_cuda.cu         # NVIDIA CUDA C++ 2D kernel source
-├── screenshots/
-│   ├── 01-wsl-verification.png
-│   ├── 02-sequential-execution.png
-│   ├── 03-openmp-execution.png
-│   ├── 04-openmp-htop-cores.png
-│   ├── 05-mpi-cluster-network.png
-│   ├── 06-mpi-execution.png
-│   ├── 07-cuda-nvidia-smi.png
-│   ├── 08-cuda-execution.png
-│   └── 09-speedup-comparison-chart.png
-├── results/
+├── 01-sequential/
+│   ├── matrix_sequential.c        # Single-threaded baseline C program
+│   └── screenshots/
+│       ├── 01-wsl-verification.png
+│       └── 02-sequential-execution.png
+├── 02-openmp/
+│   ├── matrix_openmp.c            # Shared-memory OpenMP multi-threaded C program
+│   └── screenshots/
+│       ├── 03-openmp-execution.png
+│       └── 04-openmp-htop-cores.png
+├── 03-mpi/
+│   ├── matrix_mpi.c               # Distributed-memory MPI C program
+│   ├── hosts                      # Cluster nodes hostfile
+│   └── screenshots/
+│       ├── 05a-mpi-worker3-identity.png
+│       ├── 05b-mpi-master-hosts.png
+│       ├── 05c-mpi-worker2-identity.png
+│       ├── 05d-mpi-worker1-identity.png
+│       └── 06-mpi-execution.png
+├── 04-cuda/
+│   ├── matrix_cuda.cu             # NVIDIA CUDA C++ 2D kernel source
+│   └── screenshots/
+│       ├── 07-cuda-nvidia-smi.png
+│       ├── 08-cuda-execution.png
+│       └── 09-speedup-comparison-chart.png
+├── 05-results/
 │   └── performance-comparison.md
 └── README.md
 ```
@@ -66,7 +71,7 @@ Lab-01-Parallel-Matrix-Multiplication/
 
 ```bash
 # 1. Navigate to directory
-cd src/sequential
+cd 01-sequential
 
 # 2. Compile using GCC with -O2 optimization
 gcc -O2 matrix_sequential.c -o matrix_sequential
@@ -76,8 +81,8 @@ gcc -O2 matrix_sequential.c -o matrix_sequential
 ```
 
 #### Visual Implementation Evidence:
-![01 WSL Verification](screenshots/01-wsl-verification.png)
-![02 Sequential Execution](screenshots/02-sequential-execution.png)
+![01 WSL Verification](01-sequential/screenshots/01-wsl-verification.png)
+![02 Sequential Execution](01-sequential/screenshots/02-sequential-execution.png)
 
 * **Recorded Execution Time:** `244.120000 seconds` (Baseline $1.00\times$)
 * **Verification Output:** `C[0][0] = 4000.00`
@@ -88,7 +93,7 @@ gcc -O2 matrix_sequential.c -o matrix_sequential
 
 ```bash
 # 1. Navigate to directory
-cd src/openmp
+cd 02-openmp
 
 # 2. Set thread count
 export OMP_NUM_THREADS=16
@@ -102,8 +107,8 @@ gcc -O2 -fopenmp matrix_openmp.c -o matrix_openmp
 ```
 
 #### Visual Implementation Evidence (Actual Terminal & 16-Core htop):
-![03 OpenMP Execution](screenshots/03-openmp-execution.png)
-![04 OpenMP htop Cores](screenshots/04-openmp-htop-cores.png)
+![03 OpenMP Execution](02-openmp/screenshots/03-openmp-execution.png)
+![04 OpenMP htop Cores](02-openmp/screenshots/04-openmp-htop-cores.png)
 
 * **Recorded Execution Time (8 Threads):** `30.830434 seconds` (**$7.92\times$ Speedup**)
 * **Recorded Execution Time (16 Threads):** `126.352793 seconds`
@@ -136,7 +141,7 @@ graph TD
 
 ```bash
 # 1. On Master VM, navigate to directory
-cd src/mpi
+cd 03-mpi
 
 # 2. Compile using mpicc wrapper
 mpicc -O2 matrix_mpi.c -o matrix_mpi
@@ -151,8 +156,21 @@ mpirun -np 4 --hostfile hosts sh -c '$HOME/matrix_mpi'
 ```
 
 #### Visual Implementation Evidence:
-![05 MPI Network](screenshots/05-mpi-cluster-network.png)
-![06 MPI Execution](screenshots/06-mpi-execution.png)
+
+**Worker 3 — Identity Verification (`whoami`, `hostname`, `hostname -I`):**
+![05a MPI Worker3 Identity](03-mpi/screenshots/05a-mpi-worker3-identity.png)
+
+**Master — Hosts File & Binary Distribution Verification:**
+![05b MPI Master Hosts](03-mpi/screenshots/05b-mpi-master-hosts.png)
+
+**Worker 2 — Identity Verification (`whoami`, `hostname`, `hostname -I`):**
+![05c MPI Worker2 Identity](03-mpi/screenshots/05c-mpi-worker2-identity.png)
+
+**Worker 1 — Identity Verification (`whoami`, `hostname`, `hostname -I`):**
+![05d MPI Worker1 Identity](03-mpi/screenshots/05d-mpi-worker1-identity.png)
+
+**Master — MPI Execution (`mpirun -np 4 --hostfile hosts /tmp/matrix_mpi`):**
+![06 MPI Execution](03-mpi/screenshots/06-mpi-execution.png)
 
 * **Recorded Execution Time:** `92.979510 seconds` (**$2.63\times$ Speedup**)
 * **Verification Output:** `C[0][0] = 4000.00`
@@ -167,7 +185,7 @@ nvidia-smi
 nvcc --version
 
 # 2. Navigate to directory
-cd src/cuda
+cd 04-cuda
 
 # 3. Compile CUDA C++ kernel using nvcc
 nvcc -O2 matrix_cuda.cu -o matrix_cuda
@@ -183,8 +201,8 @@ $$\text{Grid Dimensions} = \left(\frac{4000}{16}, \frac{4000}{16}\right) = 250 \
 $$\text{Total Concurrent GPU Threads} = 62,500 \times 256 = \mathbf{16,000,000\text{ Threads}}$$
 
 #### Visual Implementation Evidence:
-![07 CUDA nvidia-smi](screenshots/07-cuda-nvidia-smi.png)
-![08 CUDA Execution](screenshots/08-cuda-execution.png)
+![07 CUDA nvidia-smi](04-cuda/screenshots/07-cuda-nvidia-smi.png)
+![08 CUDA Execution](04-cuda/screenshots/08-cuda-execution.png)
 
 * **Kernel Execution Time:** `0.146443 seconds`
 * **Total CUDA Phase Time (including PCIe transfers):** `0.165004 seconds` (**$1,479.48\times$ Speedup!**)
@@ -194,7 +212,7 @@ $$\text{Total Concurrent GPU Threads} = 62,500 \times 256 = \mathbf{16,000,000\t
 
 ## 4. Final Performance & Speedup Comparison
 
-![09 Speedup Comparison](screenshots/09-speedup-comparison-chart.png)
+![09 Speedup Comparison](04-cuda/screenshots/09-speedup-comparison-chart.png)
 
 | Implementation Model | Hardware / Concurrency Resource | Execution Time (s) | Measured Speedup | Correctness ($C[0][0]$) |
 | :--- | :--- | :--- | :--- | :--- |
