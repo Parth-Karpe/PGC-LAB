@@ -24,6 +24,7 @@ PGC-LAB/
 │   ├── 01-sequential/                       # Single-threaded baseline C program
 │   │   ├── matrix_sequential.c
 │   │   └── screenshots/
+│   │       └── 01-sequential-execution.png
 │   ├── 02-openmp/                           # OpenMP shared-memory multi-threaded C program
 │   │   ├── matrix_openmp.c
 │   │   └── screenshots/

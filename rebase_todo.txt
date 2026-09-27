@@ -1,0 +1,3 @@
+reword b133b2e cleaned up and separated lab folders
+reword 65da2c0 added mpi screenshots and reorganized lab structure
+pick 4db90a8 updated folder order for better navigation

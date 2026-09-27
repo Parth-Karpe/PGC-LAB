@@ -36,8 +36,7 @@ Lab-01-Parallel-Matrix-Multiplication/
 ├── 01-sequential/
 │   ├── matrix_sequential.c        # Single-threaded baseline C program
 │   └── screenshots/
-│       ├── 01-wsl-verification.png
-│       └── 02-sequential-execution.png
+│       └── 01-sequential-execution.png
 ├── 02-openmp/
 │   ├── matrix_openmp.c            # Shared-memory OpenMP multi-threaded C program
 │   └── screenshots/
@@ -81,8 +80,7 @@ gcc -O2 matrix_sequential.c -o matrix_sequential
 ```
 
 #### Visual Implementation Evidence:
-![01 WSL Verification](01-sequential/screenshots/01-wsl-verification.png)
-![02 Sequential Execution](01-sequential/screenshots/02-sequential-execution.png)
+![01 Sequential Execution](01-sequential/screenshots/01-sequential-execution.png)
 
 * **Recorded Execution Time:** `244.120000 seconds` (Baseline $1.00\times$)
 * **Verification Output:** `C[0][0] = 4000.00`
