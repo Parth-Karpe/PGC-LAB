@@ -1,10 +1,10 @@
-# Parallel and GPU Computing (PGC) Laboratory
+# Parallel and GPU Computing (PGC) Laboratory — Experiment 01
 
-[![GitHub repo](https://img.shields.io/badge/Repository-Parth--Karpe%2FPGC--LAB-181717?style=for-the-badge&logo=github)](https://github.com/Parth-Karpe/PGC-LAB)
+[![GitHub repo](https://img.shields.io/badge/Repository-Parth--Karpe%2FPGC__LAB__EXPERIMENT__01-181717?style=for-the-badge&logo=github)](https://github.com/Parth-Karpe/PGC_LAB_EXPERIMENT_01)
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04%20%2F%2024.04%20LTS-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](#)
 [![OpenMP](https://img.shields.io/badge/OpenMP-Shared--Memory%20Threading-blue?style=for-the-badge)](#)
 [![Open MPI](https://img.shields.io/badge/Open%20MPI-Distributed%20Cluster-success?style=for-the-badge)](#)
-[![NVIDIA CUDA](https://img.shields.io/badge/NVIDIA%20CUDA-12.4%20GPU-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](#)
+[![NVIDIA CUDA](https://img.shields.io/badge/NVIDIA%20CUDA-13.4%20GPU-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](#)
 
 ---
 
@@ -19,7 +19,7 @@ The primary benchmark evaluates large-scale **$4000 \times 4000$ Dense Matrix Mu
 4. **NVIDIA CUDA (C++)** – Massively parallel 2D grid/block GPU acceleration.
 
 ```
-PGC-LAB/
+PGC_LAB_EXPERIMENT_01/
 ├── Lab-01-Parallel-Matrix-Multiplication/   # 4000x4000 Matrix Multiplication across 4 Models
 │   ├── 01-sequential/                       # Single-threaded baseline C program
 │   │   ├── matrix_sequential.c
@@ -58,7 +58,7 @@ PGC-LAB/
 | **OpenMP (8 Threads)** | 8 CPU Cores (Shared Memory) | **30.830434 s** | **7.92×** | `4000.00` | ✅ Passed |
 | **OpenMP (16 Threads)** | 16 CPU Threads (SMT/Hyperthreading)| **126.352793 s** | **1.93×** | `4000.00` | ✅ Passed |
 | **Open MPI (4 Ranks)** | 4 Distributed Nodes / VMs | **92.979510 s** | **2.63×** | `4000.00` | ✅ Passed |
-| **NVIDIA CUDA** | RTX 4500 Ada (16,000,000 GPU Threads)| **0.165004 s** | **1,479.48×** | `4000.00` | ✅ Passed |
+| **NVIDIA CUDA** | RTX 5060 Ti (16,000,000 GPU Threads)| **0.330440 s** | **738.73×** | `4000.00` | ✅ Passed |
 
 ---
 
@@ -104,7 +104,7 @@ To sync and push this repository to GitHub:
 git init
 
 # 2. Add remote origin
-git remote add origin git@github.com:Parth-Karpe/PGC-LAB.git
+git remote add origin git@github.com:Parth-Karpe/PGC_LAB_EXPERIMENT_01.git
 
 # 3. Stage all source code, results, and documentation
 git add .
@@ -122,5 +122,5 @@ git push -u origin main
 ## 👨‍💻 Author & Course Information
 
 * **Course:** Parallel and GPU Computing (PGC) Laboratory
-* **Repository:** [Parth-Karpe/PGC-LAB](https://github.com/Parth-Karpe/PGC-LAB)
+* **Repository:** [Parth-Karpe/PGC_LAB_EXPERIMENT_01](https://github.com/Parth-Karpe/PGC_LAB_EXPERIMENT_01)
 * **Status:** All 4 programming paradigms (Sequential, OpenMP, MPI, CUDA) implemented, benchmarked, verified, and documented.

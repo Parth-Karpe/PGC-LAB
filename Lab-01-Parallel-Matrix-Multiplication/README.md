@@ -3,7 +3,7 @@
 [![Language](https://img.shields.io/badge/Language-C%20%2F%20C%2B%2B%20%2F%20CUDA-blue?style=flat-square)](#)
 [![OpenMP](https://img.shields.io/badge/Parallel-OpenMP%204.5-red?style=flat-square)](#)
 [![MPI](https://img.shields.io/badge/Distributed-Open%20MPI%204.1-green?style=flat-square)](#)
-[![CUDA](https://img.shields.io/badge/GPU-NVIDIA%20CUDA%2012.4-76B900?style=flat-square)](#)
+[![CUDA](https://img.shields.io/badge/GPU-NVIDIA%20CUDA%2013.4-76B900?style=flat-square)](#)
 
 ---
 
@@ -18,8 +18,8 @@ This laboratory experiment implements, benchmarks, and rigorously verifies the s
         ▼                   ▼                               ▼                   ▼
     SEQUENTIAL            OPENMP                          MPI                 CUDA
   (Single Core)       (Shared Memory)             (Distributed Cluster)   (Massive GPU)
-  Time: 244.12s        Time: 30.83s                   Time: 92.98s        Time: 0.165s
-   Speedup: 1.0x       Speedup: 7.92x                 Speedup: 2.63x     Speedup: 1479.48x
+  Time: 244.12s        Time: 30.83s                   Time: 92.98s        Time: 0.330s
+   Speedup: 1.0x       Speedup: 7.92x                 Speedup: 2.63x     Speedup: 738.73x
 ```
 
 ### Mathematical Verification Target
@@ -202,8 +202,8 @@ $$\text{Total Concurrent GPU Threads} = 62,500 \times 256 = \mathbf{16,000,000\t
 ![07 CUDA nvidia-smi](04-cuda/screenshots/07-cuda-nvidia-smi.png)
 ![08 CUDA Execution](04-cuda/screenshots/08-cuda-execution.png)
 
-* **Kernel Execution Time:** `0.146443 seconds`
-* **Total CUDA Phase Time (including PCIe transfers):** `0.165004 seconds` (**$1,479.48\times$ Speedup!**)
+* **Kernel Execution Time:** `0.276856 seconds`
+* **Total CUDA Phase Time (including PCIe transfers):** `0.330440 seconds` (**$738.73\times$ Speedup!**)
 * **Verification Output:** `C[0][0] = 4000.00`
 
 ---
@@ -217,7 +217,7 @@ $$\text{Total Concurrent GPU Threads} = 62,500 \times 256 = \mathbf{16,000,000\t
 | **Sequential (CPU)** | 1 CPU Core (Single Thread) | **244.120000 s** | **1.00× (Baseline)** | `4000.00` (Passed) |
 | **OpenMP (Shared Memory)** | 8 CPU Cores (Shared RAM) | **30.830434 s** | **7.92×** | `4000.00` (Passed) |
 | **MPI (Distributed Memory)**| 4 VMs across Virtual Network | **92.979510 s** | **2.63×** | `4000.00` (Passed) |
-| **CUDA (GPU Parallelism)** | NVIDIA RTX 4500 Ada (16M Threads) | **0.165004 s** | **1,479.48×** | `4000.00` (Passed) |
+| **CUDA (GPU Parallelism)** | NVIDIA RTX 5060 Ti (16M Threads) | **0.330440 s** | **738.73×** | `4000.00` (Passed) |
 
 ---
 
@@ -225,4 +225,4 @@ $$\text{Total Concurrent GPU Threads} = 62,500 \times 256 = \mathbf{16,000,000\t
 
 1. **Shared-Memory (OpenMP):** Delivers near-linear scaling ($7.92\times$ on 8 cores) with zero communication overhead.
 2. **Distributed-Memory (MPI):** Enables scaling across unlimited separate cluster nodes, but data serialization over the network accounts for a significant portion of execution time.
-3. **Massive GPU Parallelism (CUDA):** Utterly dominates dense linear algebra workloads by dispatching 16 million simultaneous threads across GPU streaming multiprocessors, achieving over **$1,400\times$ faster completion**.
+3. **Massive GPU Parallelism (CUDA):** Utterly dominates dense linear algebra workloads by dispatching 16 million simultaneous threads across GPU streaming multiprocessors, achieving over **$738\times$ faster completion**.

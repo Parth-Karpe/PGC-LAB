@@ -20,7 +20,7 @@
 | **OpenMP (Shared Memory)** | 8 CPU Cores / Threads | **30.830434 s** | **7.92×** | $C[0][0] = 4000.00$ |
 | **OpenMP (High Concurrency)** | 16 Logical Threads | **126.352793 s** | **1.93×** | $C[0][0] = 4000.00$ |
 | **MPI (Distributed Memory)** | 4 Processes across 4 VMs | **92.979510 s** | **2.63×** | $C[0][0] = 4000.00$ |
-| **CUDA (GPU Parallelism)** | NVIDIA RTX 4500 Ada (16M Threads) | **0.165004 s** | **1,479.48×** | $C[0][0] = 4000.00$ |
+| **CUDA (GPU Parallelism)** | NVIDIA RTX 5060 Ti (16M Threads) | **0.330440 s** | **738.73×** | $C[0][0] = 4000.00$ |
 
 ---
 
@@ -28,4 +28,4 @@
 
 1. **OpenMP Near-Linear Scaling:** With 8 physical CPU cores, OpenMP achieves a **$7.92\times$ speedup (99.0% parallel efficiency)** because the outer loop iterations are independently partitioned without shared write conflicts.
 2. **MPI Communication Cost:** In a distributed 4-node VM cluster, `MPI_Scatter` and `MPI_Gather` incur network serialization overhead across the virtual switch, achieving a **$2.63\times$ speedup**.
-3. **CUDA Massive GPU Throughput:** Launching $16,000,000$ concurrent logical threads across $62,500$ CUDA blocks achieves a **$1,479.48\times$ total speedup**, executing $128\text{ GFLOPs}$ in just $165\text{ milliseconds}$.
+3. **CUDA Massive GPU Throughput:** Launching $16,000,000$ concurrent logical threads across $62,500$ CUDA blocks achieves a **$738.73\times$ total speedup**, executing $128\text{ GFLOPs}$ in just $330\text{ milliseconds}$.
